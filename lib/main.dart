@@ -37,38 +37,26 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             EchartsWeb(
-              option: {
-                'title': {'text': 'ECharts 入门示例'},
-                'tooltip': {'trigger': 'item'},
-                'legend': {
-                  'orient': 'vertical',
-                  'left': 'left',
-                },
-                'series': [
-                  {
-                    'name': '访问来源',
-                    'type': 'pie',
-                    'radius': '50%',
-                    'data': [
-                      {'value': 1, 'name': '搜索引擎'},
-                      {'value': 1, 'name': '直接访问'},
-                      {'value': 1, 'name': '邮件营销'},
-                      {'value': 1, 'name': '联盟广告'},
-                      {'value': 1, 'name': '直接访问'},
-                      {'value': 300, 'name': '视频广告'},
-                      {'value': 300, 'name': '视频广告2'},
-                      {'value': 300, 'name': '视频广告3'},
-                    ],
-                    'emphasis': {
-                      'itemStyle': {
-                        'shadowBlur': 10,
-                        'shadowOffsetX': 0,
-                        'shadowColor': 'rgba(0, 0, 0, 0.5)'
-                      }
-                    }
-                  }
-                ]
-              },
+              option: '''
+                {
+                    title: {
+                        text: 'ECharts entry example'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data:['Sales']
+                    },
+                    xAxis: {
+                        data: ["shirt","cardign","chiffon shirt","pants","heels","socks"]
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: 'Sales',
+                        type: 'bar',
+                        data: [5, 20, 36, 10, 10, 20]
+                    }]
+                }
+              ''',
             ),
           ],
         ),

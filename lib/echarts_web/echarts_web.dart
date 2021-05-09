@@ -8,6 +8,9 @@ import './dart_ui.dart' as ui;
 @JS('echarts')
 external dynamic echarts;
 
+@JS('eval')
+external dynamic eval;
+
 dynamic mapToJsObject(Object a) {
   return js.jsify(a);
 }
@@ -21,7 +24,7 @@ class EchartsWeb extends StatefulWidget {
     this.background = '#eee',
   }) : super(key: key);
 
-  final Map<String, Object> option;
+  final String option;
 
   final double? width;
   final double? height;
@@ -45,16 +48,15 @@ class EchartWebState extends State<EchartsWeb> {
           ..style.height = '${widget.height}');
 
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      var myChart = echarts
-          .init(document.querySelector('#echarts'), null, {'renderer': 'svg'});
-      // 指定图表的配置项和数据
-      var option = mapToJsObject(
-        widget.option,
-      );
-      // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(option);
-      // print(myChart);
-      print(option.toString());
+      eval('''
+        var chart = echarts.init(document.getElementById('echarts'));
+
+        // specify chart configuration item and data
+        var option = ${widget.option};
+
+        // use configuration item and data specified to show chart
+        chart.setOption(option);
+      ''');
     });
   }
 
